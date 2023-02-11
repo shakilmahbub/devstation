@@ -11,6 +11,7 @@
             <a class="start" href="#">Start</a>
             <a class="pause" href="#">Pause</a>
             <a class="stop" href="#">Stop</a>
+            <a href="{{ route('tasks.report', $task->id) }}">View report</a>
         </div>
         <div class="panel-body">
             <dl class="dl-horizontal">

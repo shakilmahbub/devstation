@@ -152,4 +152,11 @@ class TasksController extends Controller
         }
         return true;
     }
+
+
+    public function report($id){
+        $timetrackers = TimeTracker::where('task_id',$id)->get();
+
+        return view('tasks.report.report',compact('timetrackers'));
+    }
 }

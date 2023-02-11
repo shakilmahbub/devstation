@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('starttimer',[TasksController::class,'starttimer'])->name('starttimer');
     Route::post('pausetimer',[TasksController::class,'pausetimer'])->name('pausetimer');
     Route::post('stoptimer',[TasksController::class,'stoptimer'])->name('stoptimer');
+    Route::get('tasks/{id}/report',[TasksController::class,'report'])->name('tasks.report');
 });
 
 require __DIR__.'/auth.php';

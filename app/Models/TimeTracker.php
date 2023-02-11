@@ -10,4 +10,8 @@ class TimeTracker extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function pause(){
+        return $this->hasMany(Pauses::class,'tracker_id','id');
+    }
 }
