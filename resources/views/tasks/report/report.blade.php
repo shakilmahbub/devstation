@@ -11,9 +11,9 @@
             <a class="start" href="#">Start</a>
             <a class="pause" href="#">Pause</a>
             <a class="stop" href="#">Stop</a>
-            <a href="#">View report</a>
+            <a href="#" onclick="downloadpdf()">Download pdf</a>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" id="pdf">
             <h1>New sasson</h1>
             <dl class="dl-horizontal">
                 @foreach($timetrackers as $tracker)
@@ -35,4 +35,22 @@
             </dl>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+
+    <script>
+
+        function downloadpdf(){
+            var pdf = new jsPDF('p', 'pt', 'letter');
+
+            // add HTML content to PDF
+            pdf.fromHTML($('#pdf')[0], 15, 15, {
+                'width': 170
+            });
+
+            // download the PDF
+            pdf.save('report.pdf');
+        }
+    </script>
 </x-app-layout>
