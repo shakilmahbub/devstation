@@ -19,7 +19,7 @@
 
     <div class="panel panel-default">
         @if(auth()->user()->is_admin())
-        <div class="btn-group btn-group-sm pull-right p-6" role="group">
+        <div class="btn-group btn-group-sm pull-right p-6" role="group" style="text-align: right;">
             <a href="{{ route('projects.create') }}" class="btn btn-success" title="Create New Subject">
                 Create new
             </a>

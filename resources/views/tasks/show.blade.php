@@ -7,11 +7,11 @@
 
 
     <div class="p-6 text-gray-900 bg-white">
-        <div class="panel-header">
+        <div class="panel-header" style="text-align: right;">
             <a class="start btn btn-info" href="#">Start</a>
-            <a class="pause btn btn-info" href="#">Pause</a>
-            <a class="resume btn btn-info" href="#">Resume</a>
-            <a class="stop btn btn-info" href="#">Stop</a>
+            <a class="pause btn btn-info" style="display: none;" href="#">Pause</a>
+            <a class="resume btn btn-info" style="display: none;" href="#">Resume</a>
+            <a class="stop btn btn-info" style="display: none;" href="#">Stop</a>
             <a class="btn btn-info" href="{{ route('tasks.report', $task->id) }}">View report</a>
         </div>
         <div class="panel-body">
@@ -40,6 +40,9 @@
             }
         });
         $(".start").click(function(){
+            $(this).hide();
+            $('.stop').show();
+            $('.pause').show();
             var taskid = {{ $task->id }};
             var location = lat+','+long;
             $.post("{{ route('starttimer') }}",
@@ -56,6 +59,8 @@
         });
 
         $(".stop").click(function(){
+            $(this).hide();
+            $('.start').show();
             var taskid = {{ $task->id }};
             $.post("{{ route('stoptimer') }}",
                 {
@@ -70,6 +75,8 @@
         });
 
         $(".pause").click(function(){
+            $(this).hide();
+            $('.resume').show();
             var taskid = {{ $task->id }};
             $.post("{{ route('pausetimer') }}",
                 {

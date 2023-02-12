@@ -1,15 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('User list') }}
+            {{ __('Report') }}
         </h2>
     </x-slot>
 
 
-    <div class="panel panel-default">
+    <div class="p-6 text-gray-900 bg-white">
         <div class="panel-header">
-            <a href="#" onclick="downloadpdf()">Download pdf</a>
-            <a href="{{ route('mail.report',$id) }}">Mail report</a>
+            <a class="btn btn-info" href="#" onclick="downloadpdf()">Download pdf</a>
+            <a class="btn btn-info" href="{{ route('mail.report',$id) }}">Mail report</a>
         </div>
         <div class="panel-body" id="pdf">
             <h1>New sasson</h1>

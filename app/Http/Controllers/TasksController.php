@@ -110,12 +110,18 @@ class TasksController extends Controller
 
     public function starttimer(Request $request)
     {
-        $data = $request->all();
-        $data['start_time'] = date("Y-m-d H:i:s");
+        $tracker = TimeTracker::find($request->task_id)->latest()->first();
+        if ($tracker->stop_time != null) {
+            $data = $request->all();
+            $data['start_time'] = date("Y-m-d H:i:s");
 
-        TimeTracker::create($data);
+            TimeTracker::create($data);
 
-        return true;
+            return true;
+        }
+        else{
+            return 'Time tracker already running';
+        }
     }
 
     public function stoptimer(Request $request){
