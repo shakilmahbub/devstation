@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectsRequest;
 use App\Models\Projects;
+use App\Models\ProjectUser;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
@@ -15,8 +16,13 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects = Projects::paginate(15);
-
+        if (auth()->user()->is_admin()){
+            $projects = Projects::paginate(15);
+        }
+        else{
+            $invidated = ProjectUser::where('employee_email',auth()->user()->email)->pluck('project_id');
+            $projects = Projects::whereIn('id',$invidated)->paginate();
+        }
         return view('projects.index',compact('projects'));
     }
 

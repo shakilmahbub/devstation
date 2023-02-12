@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TasksRequest;
+use App\Mail\InviteMail;
+use App\Mail\ReportMail;
 use App\Models\Pauses;
 use App\Models\Tasks;
 use App\Models\TimeTracker;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TasksController extends Controller
 {
@@ -153,10 +157,34 @@ class TasksController extends Controller
         return true;
     }
 
+    public function resumetimer(Request $request){
+        $tracker = TimeTracker::find($request->task_id)->latest()->first();
+        if ($tracker->stop_time == null){
+            $tracker->update([
+                'is_paused' => 0
+            ]);
+
+            Pauses::where('tracker_id', $tracker->id)->update([
+                'start_time' => date("Y-m-d H:i:s")
+            ]);
+        }
+        else{
+            return 'No time tracker is running';
+        }
+        return true;
+    }
+
 
     public function report($id){
         $timetrackers = TimeTracker::where('task_id',$id)->get();
 
-        return view('tasks.report.report',compact('timetrackers'));
+        return view('tasks.report.report',compact('timetrackers','id'));
+    }
+
+    public function mailReport($id){
+        $timetrackers = TimeTracker::where('task_id',$id)->get();
+        $admin = User::where('role',0)->first()->email;
+        Mail::to($admin)->send(new ReportMail($timetrackers));
+        return redirect()->back();
     }
 }

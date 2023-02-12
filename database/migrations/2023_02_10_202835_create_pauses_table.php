@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('tracker_id');
             $table->dateTime('pause_time');
-            $table->dateTime('start_time');
+            $table->dateTime('start_time')->nullable();
             $table->timestamps();
         });
     }

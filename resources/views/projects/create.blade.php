@@ -1,17 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('User list') }}
+            {{ __('Create New Project') }}
         </h2>
     </x-slot>
-    <div class="panel panel-default">
+    <div class="p-6 text-gray-900">
 
         <div class="panel-heading clearfix">
-
-            <span class="pull-left">
-                <h4 class="mt-5 mb-5">Create New Project</h4>
-            </span>
-
             <div class="btn-group btn-group-sm pull-right" role="group">
                 <a href="{{ route('projects.index') }}" class="btn btn-primary" title="Show All projects">
                     Projects

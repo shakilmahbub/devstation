@@ -33,7 +33,13 @@ class Tasks extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
 
-    public function project(){
+    public function project()
+    {
         return $this->belongsTo(Projects::class,'project_id','id');
+    }
+
+    public function timeTracker()
+    {
+        return $this->hasMany(TimeTracker::class,'task_id');
     }
 }

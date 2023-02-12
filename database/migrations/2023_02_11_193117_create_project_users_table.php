@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('time_trackers', function (Blueprint $table) {
+        Schema::create('project_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('task_id');
-            $table->dateTime('start_time');
-            $table->dateTime('stop_time')->nullable();
-            $table->unsignedTinyInteger('is_paused')->default(0)->comment('0 = not paused 1 = paused');
-            $table->string('location',255)->nullable();
+            $table->unsignedInteger('project_id');
+            $table->string('employee_email',100);
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('time_trackers');
+        Schema::dropIfExists('project_users');
     }
 };

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->tinyInteger('role')->comment('0 = admin, 1 = employee');
-            $table->tinyInteger('is_active')->default(1)->comment('1 = active, 0 = inactive');
+            $table->tinyInteger('role')->default(1)->comment('0 = admin, 1 = employee');
+            $table->tinyInteger('is_active')->default(0)->comment('1 = active, 0 = inactive');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

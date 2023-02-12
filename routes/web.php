@@ -22,7 +22,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $tasks = \App\Models\Tasks::all();
+    return view('dashboard',compact('tasks'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -38,8 +39,12 @@ Route::middleware('auth')->group(function () {
     Route::get('tasks/create/{project}',[TasksController::class,'create'])->name('tasks.create');
     Route::post('starttimer',[TasksController::class,'starttimer'])->name('starttimer');
     Route::post('pausetimer',[TasksController::class,'pausetimer'])->name('pausetimer');
+    Route::post('resumetimer',[TasksController::class,'resumetimer'])->name('resumetimer');
     Route::post('stoptimer',[TasksController::class,'stoptimer'])->name('stoptimer');
     Route::get('tasks/{id}/report',[TasksController::class,'report'])->name('tasks.report');
+    Route::post('users/invite',[UserController::class,'invite'])->name('users.invite');
+    Route::get('users/invite',[UserController::class,'inviteCreate'])->name('users.invite.create');
+    Route::get('mail/report/{id}',[TasksController::class,'mailReport'])->name('mail.report');
 });
 
 require __DIR__.'/auth.php';

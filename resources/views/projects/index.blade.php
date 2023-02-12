@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('User list') }}
+            {{ __('Projects') }}
         </h2>
     </x-slot>
 
@@ -18,27 +18,19 @@
     @endif
 
     <div class="panel panel-default">
-
-        <div class="panel-heading clearfix">
-
-            <div class="pull-left">
-                <h4 class="mt-5 mb-5">Projects</h4>
-            </div>
-
-            <div class="btn-group btn-group-sm pull-right" role="group">
-                <a href="{{ route('projects.create') }}" class="btn btn-success" title="Create New Subject">
-                    Create new
-                </a>
-            </div>
-
+        @if(auth()->user()->is_admin())
+        <div class="btn-group btn-group-sm pull-right p-6" role="group">
+            <a href="{{ route('projects.create') }}" class="btn btn-success" title="Create New Subject">
+                Create new
+            </a>
         </div>
-
+        @endif
         @if(count($projects) == 0)
             <div class="panel-body text-center">
                 <h4>No projects Available.</h4>
             </div>
         @else
-        <div class="panel-body panel-body-with-table">
+        <div class="p-6 text-gray-900">
             <div class="table-responsive">
 
                 <table class="table table-striped ">
@@ -64,13 +56,15 @@
                                         <a href="{{ route('projects.show', $project->id ) }}" class="btn btn-info" title="Show project">
                                             Show
                                         </a>
-                                        <a href="{{ route('projects.edit', $project->id ) }}" class="btn btn-primary" title="Edit project">
-                                            Edit
-                                        </a>
+                                        @if(auth()->user()->is_admin())
+                                            <a href="{{ route('projects.edit', $project->id ) }}" class="btn btn-primary" title="Edit project">
+                                                Edit
+                                            </a>
 
-                                        <button type="submit" class="btn btn-danger" title="Delete project" onclick="return confirm(&quot;Click Ok to delete project.&quot;)">
-                                            Delete
-                                        </button>
+                                            <button type="submit" class="btn btn-danger" title="Delete project" onclick="return confirm(&quot;Click Ok to delete project.&quot;)">
+                                                Delete
+                                            </button>
+                                        @endif
                                     </div>
 
                                 </form>

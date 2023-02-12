@@ -1,17 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('User list') }}
+            {{ __('Task') }}
         </h2>
     </x-slot>
 
 
-    <div class="panel panel-default">
+    <div class="p-6 text-gray-900 bg-white">
         <div class="panel-header">
-            <a class="start" href="#">Start</a>
-            <a class="pause" href="#">Pause</a>
-            <a class="stop" href="#">Stop</a>
-            <a href="{{ route('tasks.report', $task->id) }}">View report</a>
+            <a class="start btn btn-info" href="#">Start</a>
+            <a class="pause btn btn-info" href="#">Pause</a>
+            <a class="resume btn btn-info" href="#">Resume</a>
+            <a class="stop btn btn-info" href="#">Stop</a>
+            <a class="btn btn-info" href="{{ route('tasks.report', $task->id) }}">View report</a>
         </div>
         <div class="panel-body">
             <dl class="dl-horizontal">
@@ -77,7 +78,19 @@
 
                 },
                 function(data, status){
-                    console.log(data);
+                    screenshot();
+                });
+        });
+
+        $(".resume").click(function(){
+            var taskid = {{ $task->id }};
+            $.post("{{ route('resumetimer') }}",
+                {
+                    task_id: taskid,
+                    "_token": "{{ csrf_token() }}"
+
+                },
+                function(data, status){
                     screenshot();
                 });
         });

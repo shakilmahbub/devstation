@@ -8,10 +8,8 @@
 
     <div class="panel panel-default">
         <div class="panel-header">
-            <a class="start" href="#">Start</a>
-            <a class="pause" href="#">Pause</a>
-            <a class="stop" href="#">Stop</a>
             <a href="#" onclick="downloadpdf()">Download pdf</a>
+            <a href="{{ route('mail.report',$id) }}">Mail report</a>
         </div>
         <div class="panel-body" id="pdf">
             <h1>New sasson</h1>
